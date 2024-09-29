@@ -1,14 +1,42 @@
 /* styles.css */
 
+.notes-control-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    background-color: var(--background-secondary);
+}
+
+.notes-search-input {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.notes-sort-select {
+    width: 35%;
+    padding: 8px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: var(--background-primary);
+    color: var(--text-normal);
+}
+
 .notes-scroll-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
     padding: 16px;
     overflow-y: auto;
-    height: 100%;
-    align-items: start;
-    /* Prevent grid items from stretching vertically */
+    height: calc(100% - 80px);
+    /* Adjusted to account for control container */
 }
 
 .note-card {
@@ -19,7 +47,9 @@
     box-shadow: var(--shadow-small);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    /* Remove fixed height */
     height: auto;
+    /* Ensure content dictates height */
     display: flex;
     flex-direction: column;
 }
@@ -33,6 +63,7 @@
     margin: 0 0 8px 0;
     font-size: 16px;
     color: var(--text-heading);
+    /* Prevent the title from stretching the card */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -42,6 +73,7 @@
     margin: 0;
     font-size: 14px;
     color: var(--text-normal);
+    /* Allow content to wrap naturally */
     white-space: pre-wrap;
     word-wrap: break-word;
 }

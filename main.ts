@@ -4,17 +4,17 @@ import { Plugin, WorkspaceLeaf } from 'obsidian';
 import { NotesMainView, VIEW_TYPE_NOTES_MAIN } from './NotesMainView';
 import './styles.css';
 
-export default class FlowNotes extends Plugin {
+export default class MyKeepLikePlugin extends Plugin {
 	async onload() {
 		console.log('Loading My Keep-Like Plugin');
 
-		// Register the view
+		// Register the main view
 		this.registerView(
 			VIEW_TYPE_NOTES_MAIN,
 			(leaf: WorkspaceLeaf) => new NotesMainView(leaf, this)
 		);
 
-		// Add a ribbon icon
+		// Add a ribbon icon with a valid icon name ('dice')
 		const ribbonIconEl = this.addRibbonIcon('dice', 'View All Notes', (evt: MouseEvent) => {
 			this.activateView();
 		});
@@ -35,8 +35,6 @@ export default class FlowNotes extends Plugin {
 	onunload() {
 		console.log('Unloading My Keep-Like Plugin');
 	}
-
-	// main.ts
 
 	async activateView() {
 		// Detach any existing leaves of this view type to avoid duplicates
