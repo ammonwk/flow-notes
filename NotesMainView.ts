@@ -71,8 +71,8 @@ export class NotesMainView extends ItemView {
         // Create a scrollable container
         const scrollContainer = container.createDiv({ cls: 'notes-scroll-container' });
 
-        // Initial render of notes
-        await this.renderNotes(container);
+        // Initial render of notes with fade-in animation
+        await this.renderNotes(container, true);
 
         // Implement search functionality with debouncing
         const debouncedFilter = this.debounce(this.filterNotes.bind(this), 300);
@@ -85,8 +85,9 @@ export class NotesMainView extends ItemView {
 
     /**
      * Renders all notes based on the current sort option.
+     * @param animate Whether to apply fade-in animation.
      */
-    async renderNotes(container: HTMLElement) {
+    async renderNotes(container: HTMLElement, animate: boolean = false) {
         const scrollContainer = container.querySelector('.notes-scroll-container') as HTMLElement;
         if (!scrollContainer) return;
         scrollContainer.empty();
@@ -99,7 +100,7 @@ export class NotesMainView extends ItemView {
 
         // Iterate and create note cards
         for (const file of markdownFiles) {
-            const card = scrollContainer.createDiv({ cls: 'note-card' });
+            const card = scrollContainer.createDiv({ cls: 'note-card fade-in' });
 
             // Determine if the title matches 'Untitled ?\d*'
             const titlePattern = /^Untitled ?\d*$/;
@@ -118,6 +119,16 @@ export class NotesMainView extends ItemView {
             // Click to open the note
             card.addEventListener('click', () => {
                 this.plugin.app.workspace.getLeaf(true).openFile(file);
+            });
+        }
+
+        // Remove animation class after animation ends
+        if (animate) {
+            const cards = scrollContainer.querySelectorAll('.note-card');
+            cards.forEach(card => {
+                card.addEventListener('animationend', () => {
+                    card.classList.remove('fade-in');
+                });
             });
         }
     }
@@ -195,7 +206,7 @@ export class NotesMainView extends ItemView {
         // Re-render the notes based on the current sort option
         const container = this.containerEl.children[1] as HTMLElement;
         if (container) {
-            await this.renderNotes(container);
+            await this.renderNotes(container, true);
         }
     }
 }
