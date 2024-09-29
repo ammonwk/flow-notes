@@ -1,8 +1,47 @@
-/*
+/* styles.css */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.notes-scroll-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    overflow-y: auto;
+    height: 100%;
+    align-items: start;
+    /* Prevent grid items from stretching vertically */
+}
 
-If your plugin does not need CSS, delete this file.
+.note-card {
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: var(--shadow-small);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
 
-*/
+.note-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.note-title {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: var(--text-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note-content {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-normal);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
