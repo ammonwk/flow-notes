@@ -2,6 +2,7 @@
 
 import { ItemView, WorkspaceLeaf, TFile } from 'obsidian';
 import { Plugin } from 'obsidian';
+import Masonry from 'masonry-layout';
 
 export const VIEW_TYPE_NOTES_MAIN = 'notes-main-view';
 
@@ -122,6 +123,14 @@ export class NotesMainView extends ItemView {
             });
         }
 
+        // Initialize Masonry
+        new Masonry(scrollContainer, {
+            itemSelector: '.note-card',
+            columnWidth: '.note-card',
+            percentPosition: true,
+            gutter: 16,
+        });
+
         // Remove animation class after animation ends
         if (animate) {
             const cards = scrollContainer.querySelectorAll('.note-card');
@@ -187,12 +196,12 @@ export class NotesMainView extends ItemView {
     }
 
     /**
-     * Reads the first 100 characters of the note's content for preview.
+     * Reads the first few characters of the note's content for preview.
      */
     async getNotePreview(file: TFile): Promise<string> {
         try {
             const text = await this.plugin.app.vault.read(file);
-            return text.length > 100 ? text.substring(0, 100) + '...' : text;
+            return text.length > 500 ? text.substring(0, 500) + '...' : text;
         } catch (error) {
             console.error(`Error reading file ${file.path}:`, error);
             return '';

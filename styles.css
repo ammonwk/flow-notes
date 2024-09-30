@@ -30,16 +30,20 @@
 }
 
 .notes-scroll-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    /* Remove visibility and opacity settings */
+    /* Ensure full width and proper box-sizing */
+    width: 100%;
     padding: 16px;
     overflow-y: auto;
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
     height: calc(100% - 80px);
-    /* Adjusted to account for control container */
+    box-sizing: border-box;
 }
 
 .note-card {
+    width: 250px;
+    /* Fixed width for Masonry */
     background-color: var(--background-primary);
     border: 1px solid var(--background-modifier-border);
     border-radius: 8px;
@@ -47,11 +51,9 @@
     box-shadow: var(--shadow-small);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-    /* Remove fixed height */
-    height: auto;
-    /* Ensure content dictates height */
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 16px;
+    /* Space below each card */
+    box-sizing: border-box;
 }
 
 .note-card:hover {
@@ -63,7 +65,6 @@
     margin: 0 0 8px 0;
     font-size: 16px;
     color: var(--text-heading);
-    /* Prevent the title from stretching the card */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -73,7 +74,6 @@
     margin: 0;
     font-size: 14px;
     color: var(--text-normal);
-    /* Allow content to wrap naturally */
     white-space: pre-wrap;
     word-wrap: break-word;
 }
@@ -92,5 +92,27 @@
 }
 
 .fade-in {
-    animation: fadeIn 0.3s ease-out forwards;
+    /* wait 0.5 seconds before begining to fade in */
+    opacity: 0;
+    animation: fadeIn 0.15s ease-out forwards;
+    animation-delay: 0.25s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .note-card {
+        width: 200px;
+    }
+}
+
+@media (max-width: 800px) {
+    .note-card {
+        width: 150px;
+    }
+}
+
+@media (max-width: 500px) {
+    .note-card {
+        width: 100%;
+    }
 }

@@ -11,6 +11,10 @@
     "importHelpers": true,
     "isolatedModules": true,
     "strictNullChecks": true,
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
     "lib": [
       "DOM",
       "ES5",
