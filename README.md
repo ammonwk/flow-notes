@@ -1,96 +1,71 @@
-# Obsidian Sample Plugin
+# Flow Notes Plugin for Obsidian
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+Flow Notes provides a Google Keep-like masonry view of your Obsidian notes, designed to facilitate atomic note-taking and make reviewing large collections of notes easier and more intuitive.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## Features
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+- **Masonry Layout**: Notes are displayed in a responsive grid layout that automatically adjusts based on content length and viewport size
+- **Live Search**: Instantly filter notes as you type
+- **Tag Filtering**: Filter notes by their tags using an intuitive dropdown interface
+- **Multiple Sort Options**: Sort your notes by:
+ - Title (alphabetical)
+ - Creation date
+ - Last modified date
+- **Real-time Updates**: View updates automatically when notes are created, modified, or deleted
+- **Preview Cards**: Each note is displayed as a card with a preview of its content
+- **Smooth Animations**: Fade-in animations when loading notes for a polished feel
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+## Installation
 
-## First time developing plugins?
+> NOTE: This plugin has yet to be published and presented to the Obsidian team. The following instructions will be applicable once it is publised, but until then the plugin can only be built manually and placed in the plugins directory.
 
-Quick starting guide for new plugin devs:
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+1. Open Obsidian Settings
+2. Go to Community Plugins and disable Safe Mode
+3. Click Browse and search for "Flow Notes"
+4. Install the plugin
+5. Enable the plugin in your Community Plugins list
 
-## Releasing new releases
+## Usage
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+There are several ways to open the Flow Notes view:
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+- Click the dice icon in the ribbon menu
+- Use the command palette and search for "Open All Notes View"
+- Use the assigned hotkey (if you've set one)
 
-## Adding your plugin to the community plugin list
+### Controls
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+The view provides several ways to organize and find your notes:
 
-## How to use
+- Use the search bar to filter notes by content
+- Click "Filter Tags" to show/hide notes with specific tags
+- Use the sort dropdown to change how notes are ordered
+- Click any note card to open it in a new leaf
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+## Development
 
-## Manually installing the plugin
+If you want to contribute to the plugin or modify it for your own use:
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+1. Clone this repository
+2. Run '''npm install''' to install dependencies
+3. Run '''npm run dev''' to start compilation in watch mode
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+### Manual Installation for Development
 
-## Funding URL
+1. Create a folder in your vault's '''.obsidian/plugins''' folder called '''flow-notes'''
+2. Copy your '''main.js''', '''manifest.json''', and '''styles.css''' files into the folder
+3. Reload Obsidian to see changes
 
-You can include funding URLs where people who use your plugin can financially support it.
+## Support
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+If you encounter any issues or have feature requests, please file them on the GitHub repository's Issues page.
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+## License
 
-If you have multiple URLs, you can also do:
+MIT License. See LICENSE file for details.
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+## Acknowledgements
 
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+- Built using the Obsidian Plugin API
+- Uses Masonry.js for the grid layout
